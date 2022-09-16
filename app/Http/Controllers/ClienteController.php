@@ -14,7 +14,10 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
+
+        $datos['clientes']=cliente::paginate(10);
+
+        return view('cliente.index', $datos);
     }
 
     /**
@@ -35,7 +38,17 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datoscliente = request()->except('_token');
+      //  return response()->json($datoscliente);
+
+        if($request->hasFile('foto')){
+
+            $datoscliente['foto']=$request->file('foto')->store('uploads','public');
+
+        }
+
+      cliente::insert($datoscliente);
+      return response()->json($datoscliente);
     }
 
     /**

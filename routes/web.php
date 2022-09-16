@@ -13,7 +13,7 @@ use App\http\Controllers\ClienteController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/*
 Route::get('/', function () {
     return view('welcome');
 });
@@ -23,4 +23,5 @@ Route::get('/cliente', function () {
 });
 
 Route::get('cliente/create',[ClienteController::class,'create']);
-
+*/
+Route::resource('cliente',ClienteController::class);
