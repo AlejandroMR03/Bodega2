@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\http\Controllers\ClienteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/cliente', function () {
+    return view('cliente.index');
+});
+
+Route::get('cliente/create',[ClienteController::class,'create']);
+
