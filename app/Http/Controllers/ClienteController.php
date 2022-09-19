@@ -70,7 +70,8 @@ class ClienteController extends Controller
      */
     public function edit(Cliente $cliente)
     {
-        return view('Cliente.edit');
+        return view('Cliente.edit',compact('cliente'));
+
     }
 
     /**
@@ -82,7 +83,7 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $datoscliente = request()->except(['_token','method']);
+        $datoscliente = request()->except(['_token','_method']);
         cliente::where('id','=',$id)->update($datoscliente);
         $cliente=cliente::findOrFail($id);
         return view('Cliente.edit', compact('cliente'));

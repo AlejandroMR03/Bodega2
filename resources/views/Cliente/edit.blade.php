@@ -2,7 +2,6 @@
 @csrf
 
 {{method_field('PATCH')}}
-
 @include('Cliente.form');
 
 
