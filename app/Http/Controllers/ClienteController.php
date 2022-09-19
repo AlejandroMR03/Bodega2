@@ -48,7 +48,7 @@ class ClienteController extends Controller
         }
 
       cliente::insert($datoscliente);
-      return response()->json($datoscliente);
+      return response("El Cliente se ha creado correctamente");
     }
 
     /**
@@ -70,7 +70,7 @@ class ClienteController extends Controller
      */
     public function edit(Cliente $cliente)
     {
-        //
+        return view('Cliente.edit');
     }
 
     /**
@@ -80,9 +80,12 @@ class ClienteController extends Controller
      * @param  \App\Models\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cliente $cliente)
+    public function update(Request $request, $id)
     {
-        //
+        $datoscliente = request()->except(['_token','method']);
+        cliente::where('id','=',$id)->update($datoscliente);
+        $cliente=cliente::findOrFail($id);
+        return view('Cliente.edit', compact('cliente'));
     }
 
     /**
@@ -91,8 +94,9 @@ class ClienteController extends Controller
      * @param  \App\Models\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cliente $cliente)
+    public function destroy($id)
     {
-        //
+        cliente::destroy($id);
+        return redirect('cliente');
     }
 }

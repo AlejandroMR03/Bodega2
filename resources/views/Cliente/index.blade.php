@@ -1,6 +1,9 @@
 Mostrar la lista de clientes
-<table class="table table-dark">
-    <thead class="thead-dark">
+<link rel="stylesheet" href="app.css">
+<table class="index">
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <thead class="table-dark">
         <tr>
             <th>#</th>
             <th>Nombre</th>
@@ -30,7 +33,26 @@ Mostrar la lista de clientes
             <td>{{$cliente->Numero_Tarjeta_Asociado}}</td>
             <td>{{$cliente->Correo_Electronico}}</td>
             <td>{{$cliente->foto}}</td>
-            <td>editar | borrar</td>
+            <td>
+                <a href="{{ url('/cliente/'.$cliente->id.'/edit')}}">
+                    <input type="submit" onclick="return confirm('¿Quieres Editar un Cliente??')" value="Editar">
+                    @csrf
+                    {{method_field('PATCH')}}
+                </a>
+
+
+
+            <form action="{{url('/cliente/'. $cliente->id) }}" method="post">
+
+            <input type="submit" onclick="return confirm('¿Quieres borrar?')" value="Borrar">
+            @csrf
+            {{method_field('DELETE')}}
+
+
+        </form>
+
+
+            </td>
         </tr>
         @endforeach
     </tbody>
